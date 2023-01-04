@@ -1,12 +1,22 @@
 <?php
+
 class Conta {
     private string $cpfTitular;
     private string $nomeTitular;
     private float $saldo = 0;
+    private static $numeroDeContas = 0;
+    private static $numeroBanco = 22;
 
     public function __construct(string $cpf, string $nome){
+        $this -> validarNome($nome);
         $this -> cpfTitular = $cpf;
         $this -> nomeTitular = $nome;
+
+        self :: $numeroDeContas++;
+    }
+
+    public function __destruct(){
+        self :: $numeroDeContas --;
     }
 
     public function sacar(float $valor){
@@ -47,6 +57,21 @@ class Conta {
 
     public function nomeTitular(): string {
         return $this -> nomeTitular;
+    }
+
+    private function validarNome(string $nome){
+        if(strlen($nome) < 5){
+            echo "Nome inválido! Nome menor que 5 caracteres";
+            exit();
+        }
+    }
+
+    public static function numeroDeContas():int{
+        return self ::$numeroDeContas;
+    }
+
+    public static function numeroBanco():int{
+        return self :: $numeroBanco;
     }
 }
 
