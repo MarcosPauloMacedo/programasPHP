@@ -1,16 +1,14 @@
 <?php
 require_once './src/Conta.php';
+require_once './src/Titular.php';
+require_once './src/CPF.php';
 
-$conta1 = new Conta('123321','marcos');
-$conta1 -> depositar(500);
+$cpfMarcos = new CPF('122321');
 
-$conta2 = new Conta('123321','maria');
-$conta2 = new Conta('23332','antonio');
+$marcos = new Titular('marcos',$cpfMarcos);
 
-new Conta('132213','josé');
+$primeiraConta = new Conta($marcos);
 
+$primeiraConta -> depositar(100);
 
-echo Conta :: numeroDeContas() .PHP_EOL;
-//echo Conta :: numeroBanco();
-
-
+echo $primeiraConta -> cpfTitular();

@@ -1,17 +1,13 @@
 <?php
 
 class Conta {
-    private string $cpfTitular;
-    private string $nomeTitular;
-    private float $saldo = 0;
+    
     private static $numeroDeContas = 0;
     private static $numeroBanco = 22;
 
-    public function __construct(string $cpf, string $nome){
-        $this -> validarNome($nome);
-        $this -> cpfTitular = $cpf;
-        $this -> nomeTitular = $nome;
-
+    public function __construct(Titular $titular){
+        $this -> titular = $titular;
+        $this -> saldo = 0;
         self :: $numeroDeContas++;
     }
 
@@ -51,21 +47,6 @@ class Conta {
         return $this -> saldo;
     }
 
-    public function cpfTitular(): string{
-        return $this -> cpfTitular;
-    }
-
-    public function nomeTitular(): string {
-        return $this -> nomeTitular;
-    }
-
-    private function validarNome(string $nome){
-        if(strlen($nome) < 5){
-            echo "Nome inválido! Nome menor que 5 caracteres";
-            exit();
-        }
-    }
-
     public static function numeroDeContas():int{
         return self ::$numeroDeContas;
     }
@@ -73,6 +54,15 @@ class Conta {
     public static function numeroBanco():int{
         return self :: $numeroBanco;
     }
+
+    public function nomeTitular() :string{
+        return $this -> titular -> nome();
+    }
+
+    public function cpfTitular() :string {
+        return $this -> titular -> cpf();
+    }
 }
+
 
 
