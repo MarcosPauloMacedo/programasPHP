@@ -1,11 +1,13 @@
 <?php
-
-use Conta as GlobalConta;
-
 class Conta {
-    public string $cpfTitular;
-    public string $nomeTitular;
-    public float $saldo = 0;
+    private string $cpfTitular;
+    private string $nomeTitular;
+    private float $saldo = 0;
+
+    public function __construct(string $cpf, string $nome){
+        $this -> cpfTitular = $cpf;
+        $this -> nomeTitular = $nome;
+    }
 
     public function sacar(float $valor){
         if($valor > $this -> saldo){
@@ -34,14 +36,18 @@ class Conta {
             $conta -> saldo += $valor;
         }
     }
+
+    public function saldo() :float{
+        return $this -> saldo;
+    }
+
+    public function cpfTitular(): string{
+        return $this -> cpfTitular;
+    }
+
+    public function nomeTitular(): string {
+        return $this -> nomeTitular;
+    }
 }
-
-$conta1 = new Conta();
-$conta2 = new Conta();
-
-$conta1 -> depositar(100);
-$conta1 -> transferir($conta2,50);
-
-echo $conta2 -> saldo;
 
 
