@@ -1,13 +1,17 @@
 <?php
 
+namespace Alura\Banco\Model\Conta;
+
+use Alura\Banco\Model\Conta\Titular;
+
 class Conta {
     
     private static $numeroDeContas = 0;
     private static $numeroBanco = 22;
+    private float $saldo = 0;
 
     public function __construct(Titular $titular){
         $this -> titular = $titular;
-        $this -> saldo = 0;
         self :: $numeroDeContas++;
     }
 
@@ -63,6 +67,3 @@ class Conta {
         return $this -> titular -> cpf();
     }
 }
-
-
-
