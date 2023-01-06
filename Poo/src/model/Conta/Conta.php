@@ -26,7 +26,7 @@ abstract class Conta {
             echo 'Valor indisponível!';
         }
         else{
-            $valor = $valor + $valor * 0.05;
+            $valor = $valor + $valor * $this -> tarifa();
             $this -> saldo -= $valor;
         }
     }
