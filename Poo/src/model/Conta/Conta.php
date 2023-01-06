@@ -3,12 +3,14 @@
 namespace Alura\Banco\Model\Conta;
 
 use Alura\Banco\Model\Conta\Titular;
+use Alura\Banco\Model\CPF;
 
-class Conta {
+abstract class Conta {
     
     private static $numeroDeContas = 0;
     private static $numeroBanco = 22;
     private float $saldo = 0;
+    private Titular $titular;
 
     public function __construct(Titular $titular){
         $this -> titular = $titular;
@@ -24,9 +26,12 @@ class Conta {
             echo 'Valor indisponível!';
         }
         else{
+            $valor = $valor + $valor * 0.05;
             $this -> saldo -= $valor;
         }
     }
+
+    abstract protected function tarifa() : float;
 
     public function depositar(float $valor): void{
         if($valor <=0 ){
@@ -63,7 +68,7 @@ class Conta {
         return $this -> titular -> nome();
     }
 
-    public function cpfTitular() :string {
+    public function cpfTitular() :CPF {
         return $this -> titular -> cpf();
     }
 }
